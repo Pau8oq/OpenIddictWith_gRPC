@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option csharp_namespace = "TranslationService.v1";
+
+package TranslationService.v1;
+
+import "google/protobuf/empty.proto";
+
+service TranslationService{
+    rpc Create(stream TranslationCreationRequest) returns (stream TranslationCreationReply);
+    rpc GetAll(google.protobuf.Empty) returns (stream TranslationReply);
+    rpc Update(TranslationUpdateRequest) returns (google.protobuf.Empty);
+}
+
+message TranslationUpdateRequest{
+    int32 Id = 1;
+    string EnglishWord = 2;
+    string TranslationText = 3;
+    Language Language = 4;
+}
+
+message TranslationReply{
+    int32 Id = 1;
+    string EnglishWord = 2;
+    string TranslationText = 3;
+    Language Language = 4;
+}
+
+message TranslationCreationRequest{
+    string EnglishWord = 1;
+    string TranslationText = 2;
+    Language Language = 3;
+}
+
+message TranslationCreationReply{
+    int32 Id = 1;
+    string EnglishWord = 2;
+    string TranslationText = 3;
+    Language Language = 4;
+}
+
+message Language{
+    int32 Id = 1;
+    string LangName = 2;
+}

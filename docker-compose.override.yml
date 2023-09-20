@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  translating.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__TranslationService=Server=grcpopeniddict-sql-server,1433;Initial Catalog=gRCPOpenIddict; User ID=sa; Password=Zadvirja123; TrustServerCertificate=True
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/client.key
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/client.crt 
+    ports:
+      - "7010:80"
+      - "7020:443"
+    volumes:
+      - ./Certificates/certs:/https
+      
+
+  web.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - TranslationServiceUri=https://host.docker.internal:7020
+      - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/client.key
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/client.crt 
+    ports:
+      - "7110:80"
+      - "7120:443"
+    volumes:
+      - ./Certificates/certs:/https
+
+  identityserver.grpc:
+     environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=https://+:443;http://+:80
+       - ConnectionStrings__DefaultIdentityConnection=Server=grcpopeniddict-sql-server,1433;Initial Catalog=gRCPOpenIddictIdentity; User ID=sa; Password=Zadvirja123; TrustServerCertificate=True
+       - ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/https/client.key
+       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/client.crt 
+     ports:
+       - "7210:80"
+       - "7220:443"
+     volumes:
+       - ./Certificates/certs:/https

@@ -1,0 +1,35 @@
+[ req ]
+default_bits           = 4096
+days                   = 9999
+distinguished_name     = req_distinguished_name
+req_extensions         = req_ext
+attributes             = req_attributes
+prompt                 = no
+x509_extensions        = v3_ca
+
+[ req_distinguished_name ]
+C                      = UA
+ST                     = LV
+L                      = Lviv
+O                      = Example Co
+OU                     = techops
+CN                     = openiddict_grpc_translation
+emailAddress           = localhost@example.com
+
+[req_ext]
+subjectAltName = @alt_names
+#extendedKeyUsage = serverAuth, clientAuth #невідомо чи потрібно але коли idendity duendo то не паше
+
+[alt_names]
+DNS.1 = localhost
+DNS.2 = host.docker.internal
+
+[ req_attributes ]
+challengePassword      = password
+
+[ v3_ca ]
+authorityInfoAccess = @issuer_info
+
+[ issuer_info ]
+OCSP;URI.0 = http://ocsp.example.com/
+caIssuers;URI.0 = http://example.com/ca.cert

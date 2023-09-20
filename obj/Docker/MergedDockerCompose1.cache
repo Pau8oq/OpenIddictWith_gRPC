@@ -1,0 +1,123 @@
+name: dockercompose17225474212239774926
+services:
+  grcpopeniddict-sql-server:
+    container_name: grcpopeniddict-sql-server
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Zadvirja123
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: "1433"
+      protocol: tcp
+    volumes:
+    - type: volume
+      target: /var/opt/mssql
+      volume: {}
+  identityserver.grpc:
+    build:
+      context: D:\Projects\gRPC\OpenIddictWithgRPC
+      dockerfile: Identity/IdentityServer/Dockerfile
+    depends_on:
+      grcpopeniddict-sql-server:
+        condition: service_started
+    entrypoint:
+    - ./docker-entrypoint.sh
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/client.key
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/client.crt
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      ConnectionStrings__DefaultIdentityConnection: Server=grcpopeniddict-sql-server,1433;Initial
+        Catalog=gRCPOpenIddictIdentity; User ID=sa; Password=Zadvirja123; TrustServerCertificate=True
+    image: identityservergrpc
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "7210"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "7220"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: D:\Projects\gRPC\OpenIddictWithgRPC\Certificates\certs
+      target: /https
+      bind:
+        create_host_path: true
+  translating.grpc:
+    build:
+      context: D:\Projects\gRPC\OpenIddictWithgRPC
+      dockerfile: Translating/Translating.gRPC/Dockerfile
+    depends_on:
+      grcpopeniddict-sql-server:
+        condition: service_started
+    entrypoint:
+    - ./docker-entrypoint.sh
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/client.key
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/client.crt
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      ConnectionStrings__TranslationService: Server=grcpopeniddict-sql-server,1433;Initial
+        Catalog=gRCPOpenIddict; User ID=sa; Password=Zadvirja123; TrustServerCertificate=True
+    image: translatinggrpc
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "7010"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "7020"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: D:\Projects\gRPC\OpenIddictWithgRPC\Certificates\certs
+      target: /https
+      bind:
+        create_host_path: true
+  web.grpc:
+    build:
+      context: D:\Projects\gRPC\OpenIddictWithgRPC
+      dockerfile: Web/Translating.Web/Dockerfile
+    depends_on:
+      translating.grpc:
+        condition: service_started
+    entrypoint:
+    - ./docker-entrypoint.sh
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/client.key
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/client.crt
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      TranslationServiceUri: https://host.docker.internal:7020
+    image: webgrpc
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "7110"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "7120"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: D:\Projects\gRPC\OpenIddictWithgRPC\Certificates\certs
+      target: /https
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose17225474212239774926_default

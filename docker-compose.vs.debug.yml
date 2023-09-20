@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+    translating.grpc:
+        entrypoint: "./docker-entrypoint.sh"
+    web.grpc:
+        entrypoint: "./docker-entrypoint.sh"
+    identityserver.grpc:
+        entrypoint: "./docker-entrypoint.sh"

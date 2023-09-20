@@ -1,0 +1,10 @@
+﻿global using Microsoft.AspNetCore;
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Authentication.Cookies;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Primitives;
+global using OpenIddict.Abstractions;
+global using OpenIddict.Server.AspNetCore;
+global using System.Security.Claims;
+global using Microsoft.AspNetCore.Authorization;
+global using static OpenIddict.Abstractions.OpenIddictConstants;

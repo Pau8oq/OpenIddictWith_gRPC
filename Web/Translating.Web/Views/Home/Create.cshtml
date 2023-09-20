@@ -1,0 +1,44 @@
+﻿@model Translating.Web.Domain.Models.CreateTranslationModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Translation</h1>
+
+<form method="post" asp-action="Create" asp-controller="Home">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="EnglishWord">EnglishWord</label>
+        <div>
+            <input type="text" asp-for="EnglishWord" value="@Model.EnglishWord" />
+        </div>
+        <div>
+            <span asp-validation-for="EnglishWord" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <label asp-for="TranslationText">TranslationText</label>
+        <div>
+            <input type="text" asp-for="TranslationText" value="@Model.TranslationText" />
+        </div>
+        <div>
+            <span asp-validation-for="TranslationText" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="Language.Name">Language</label>
+        <div>
+            <input type="text" asp-for="Language.Name" value="@Model.Language.Name" />
+        </div>
+        <div>
+            <span asp-validation-for="Language.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
+

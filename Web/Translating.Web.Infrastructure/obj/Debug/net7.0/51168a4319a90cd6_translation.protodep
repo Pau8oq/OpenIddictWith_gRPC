@@ -1,0 +1,3 @@
+obj\Debug\net7.0\Protos\v1/Translation.cs \
+obj\Debug\net7.0\Protos\v1/TranslationGrpc.cs: C:/Users/ugrin/.nuget/packages/grpc.tools/2.58.0/build/native/include/google/protobuf/empty.proto\
+ Protos/v1/translation.proto

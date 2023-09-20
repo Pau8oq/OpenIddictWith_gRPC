@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  translating.grpc:
+    image: ${DOCKER_REGISTRY-}translatinggrpc
+    build:
+      context: .
+      dockerfile: Translating/Translating.gRPC/Dockerfile
+    depends_on:
+        - grcpopeniddict-sql-server
+
+
+  web.grpc:
+    image: ${DOCKER_REGISTRY-}webgrpc
+    build:
+      context: .
+      dockerfile: Web/Translating.Web/Dockerfile
+    depends_on:
+        - translating.grpc
+
+
+  identityserver.grpc:
+    image: ${DOCKER_REGISTRY-}identityservergrpc
+    build:
+      context: .
+      dockerfile: Identity/IdentityServer/Dockerfile
+    depends_on:
+        - grcpopeniddict-sql-server
+
+  grcpopeniddict-sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: grcpopeniddict-sql-server
+    environment:
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "Zadvirja123"
+    volumes:
+        - "/var/opt/mssql"
+    ports:
+        - "1433:1433"

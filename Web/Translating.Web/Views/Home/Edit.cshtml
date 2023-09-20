@@ -1,0 +1,36 @@
+﻿@model Translating.Web.Domain.Models.TranslationModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Translation - @Model.EnglishWord</h1>
+
+<form method="post" asp-action="Edit" asp-controller="Home">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+
+    <div>
+        <label asp-for="EnglishWord"></label>
+        <div>
+            <input type="text" asp-for="EnglishWord" value="@Model.EnglishWord" />
+        </div>
+        <div>
+            <span asp-validation-for="EnglishWord" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <label asp-for="TranslationText"></label>
+        <div>
+            <input type="text" asp-for="TranslationText" value="@Model.TranslationText" />
+        </div>
+        <div>
+            <span asp-validation-for="TranslationText" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Save"/>
+    </div>
+</form>
+

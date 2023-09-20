@@ -1,0 +1,12 @@
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\bin\Debug\net7.0\Translation.Infrastructure.deps.json
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\bin\Debug\net7.0\Translation.Infrastructure.dll
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\bin\Debug\net7.0\Translation.Infrastructure.pdb
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.csproj.AssemblyReference.cache
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.AssemblyInfoInputs.cache
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.AssemblyInfo.cs
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.dll
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\refint\Translation.Infrastructure.dll
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\Translation.Infrastructure.pdb
+D:\Projects\gRPC\OpenIddictAndTranslation\Translation\Translation.Infrastructure\obj\Debug\net7.0\ref\Translation.Infrastructure.dll
